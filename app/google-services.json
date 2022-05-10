@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103934706538",
+    "project_id": "leaseland-d1477",
+    "storage_bucket": "leaseland-d1477.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103934706538:android:31ff072f31c91958791b13",
+        "android_client_info": {
+          "package_name": "com.example.leaseland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103934706538-e7eb5nk6204h6ipfl5bn5deoka2it3dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJHsL_n0YJoDe83-BerPthNk1TcrHgCZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103934706538-e7eb5nk6204h6ipfl5bn5deoka2it3dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
