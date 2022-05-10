@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LeaseLand">
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".SignupActivity"
             android:exported="false"
-            android:label="Sign Up"/>
+            android:label="Sign Up" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

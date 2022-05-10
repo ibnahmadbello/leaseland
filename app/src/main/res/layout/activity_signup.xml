@@ -2,66 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".SignupActivity">
 
     <TextView
-        android:id="@+id/login_text"
+        android:id="@+id/registration_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Login"
+        android:text="Registration"
         android:textSize="25dp"
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/login_email"
+        android:id="@+id/full_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
-        android:text="Email"/>
+        android:text="Full Name"/>
 
     <EditText
-        android:id="@+id/email_text"
+        android:id="@+id/name_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:ems="10"/>
+        android:ems="10"
+        android:hint="Enter full Name"/>
 
     <TextView
-        android:id="@+id/login_password"
+        android:id="@+id/email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="Email"
         android:layout_marginLeft="100dp"/>
 
     <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:ems="10"
+        android:hint="Enter email"/>
+
+    <TextView
         android:id="@+id/password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginLeft="100dp" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:inputType="textPassword"
-        android:ems="10"/>
+        android:ems="10"
+        android:hint="Enter Password"/>
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:text="Login"/>
+        android:text="Register"/>
 
     <TextView
-        android:id="@+id/register_link"
+        android:id="@+id/login_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="New to LeaseLand? Register here!"
+        android:text="Already Registered? Login here"
         android:gravity="center"
         android:textSize="20dp"
-        android:textColor="#3F51B5"/>
+        android:textColor="#3f51B5"/>
 
 </LinearLayout>

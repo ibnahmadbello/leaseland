@@ -8,18 +8,18 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-        TextView login = findViewById(R.id.login_link);
-        login.setMovementMethod(LinkMovementMethod.getInstance());
-        login.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_login);
+        TextView register = findViewById(R.id.register_link);
+        register.setMovementMethod(LinkMovementMethod.getInstance());
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
