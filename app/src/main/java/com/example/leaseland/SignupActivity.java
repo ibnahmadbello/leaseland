@@ -31,7 +31,6 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-//        TextView login = findViewById(R.id.login_link);
 
         mEmail = findViewById(R.id.email_edit_text);
         mPass = findViewById(R.id.password_edit_text);
