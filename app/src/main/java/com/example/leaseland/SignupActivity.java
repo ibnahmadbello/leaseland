@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText mEmail, mPass;
+    private EditText mEmail, mPass, confirmPasswordEditText;
     private TextView mTextView;
     private Button signUpButton;
 
@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         mPass = findViewById(R.id.password_edit_text);
         mTextView = findViewById(R.id.login_link);
         signUpButton = findViewById(R.id.register_button);
+        confirmPasswordEditText = findViewById(R.id.confirm_password_edit_text);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -57,8 +58,12 @@ public class SignupActivity extends AppCompatActivity {
     private void createUser(){
         String email = mEmail.getText().toString();
         String password = mPass.getText().toString();
+        String secondPassword = confirmPasswordEditText.getText().toString();
 
-        if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!password.equals(secondPassword)){
+            confirmPasswordEditText.setError("Password does not match...");
+            confirmPasswordEditText.requestFocus();
+        } else if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             if (!password.isEmpty()){
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -71,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignupActivity.this, "Registrattion Failed !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Registration Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
