@@ -17,10 +17,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText mEmail, mPass;
-    private TextView mTextView;
+    private TextView mTextView, forgetPasswordTextView;
     private Button signInButton;
 
     private FirebaseAuth mAuth;
@@ -34,22 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         mPass = findViewById(R.id.login_password_text);
         signInButton = findViewById(R.id.login_button);
         mTextView = findViewById(R.id.register_link);
+        forgetPasswordTextView = findViewById(R.id.forget_password);
 
         mAuth = FirebaseAuth.getInstance();
 
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            }
-        });
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
-        });
+        forgetPasswordTextView.setOnClickListener(this);
+        mTextView.setOnClickListener(this);
+        signInButton.setOnClickListener(this);
 
     }
 
@@ -81,5 +72,24 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             mEmail.setError("Please enter a valid email address");
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.forget_password:
+                forgetPassword();
+                break;
+            case R.id.register_link:
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                break;
+            case R.id.login_button:
+                loginUser();
+                break;
+        }
+    }
+
+    private void forgetPassword() {
+
     }
 }
