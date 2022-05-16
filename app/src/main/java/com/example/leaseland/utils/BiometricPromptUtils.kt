@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.example.leaseland.R
 
 // Since we are using the same methods in more than one Activity, better give them their own file.
 object BiometricPromptUtils {
@@ -23,8 +24,7 @@ object BiometricPromptUtils {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                Log.d(TAG, "User biometric rejected.
-                        ")
+                Log.d(TAG, "User biometric rejected.")
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {

@@ -9,4 +9,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="prompt_info_title">Sample App Authentication</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">Sample App is using Android biometric authentication</string>
+    <string name="prompt_info_use_app_password">Use app password</string>
 </resources>
