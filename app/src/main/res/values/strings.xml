@@ -13,4 +13,8 @@
     <string name="prompt_info_subtitle">Please login to get access</string>
     <string name="prompt_info_description">Sample App is using Android biometric authentication</string>
     <string name="prompt_info_use_app_password">Use app password</string>
+    <string name="enable_biometric_login">Enable Biometric Login</string>
+    <string name="desc_biometrics_authorization">Enter your login ID and password to confirm activation of Biometric Login.</string>
+    <string name="cancel">Cancel</string>
+    <string name="btn_authorize">Authorize</string>
 </resources>
