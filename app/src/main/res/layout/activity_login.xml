@@ -73,4 +73,13 @@
         android:textSize="15sp"
         android:layout_gravity="bottom|center_horizontal"/>
 
+    <TextView
+        android:id="@+id/use_biometric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use Biometrics"
+        android:layout_marginTop="100dp"
+        android:textSize="25sp"
+        android:layout_gravity="bottom|center_horizontal"/>
+
 </LinearLayout>
