@@ -36,6 +36,7 @@
                 android:text="Are you a Poly Staff?"/>
 
             <RadioGroup
+                android:id="@+id/staffOrNot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -54,39 +55,62 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Department"
             android:visibility="gone"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Place of Work"
-            android:visibility="gone"/>
 
         <EditText
+            android:id="@+id/enter_department"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Department or place of work"
+            android:hint="Enter Department"
             android:visibility="gone"/>
 
+            <TextView
+                android:id="@+id/staffId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Staff ID:"
+                android:visibility="gone"/>
+
         <EditText
+            android:id="@+id/enter_staff_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Staff ID"
             android:visibility="gone"/>
 
+            <TextView
+                android:id="@+id/placeOfWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Place of Work"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/enter_place_of_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter place of work"
+                android:visibility="gone"/>
+
         <TextView
+            android:id="@+id/residential_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Residential Address"/>
+            android:text="Residential Address"
+            android:visibility="gone"/>
 
         <EditText
+            android:id="@+id/enter_residential_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your Residential Address"/>
+            android:hint="Enter your Residential Address"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
