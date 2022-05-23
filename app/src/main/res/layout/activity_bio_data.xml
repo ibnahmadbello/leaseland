@@ -54,17 +54,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Department"/>
+            android:text="Department"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Place of Work"/>
+            android:text="Place of Work"
+            android:visibility="gone"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Department or place of work"/>
+            android:hint="Enter Department or place of work"
+            android:visibility="gone"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Staff ID"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
