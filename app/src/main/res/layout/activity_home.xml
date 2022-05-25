@@ -12,16 +12,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome! Please Complete your Bio-data"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="59dp" />
+        android:textSize="32sp"/>
 
     <Button
         android:id="@+id/biodata_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click here to Fill Biodata"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="128dp" />
+        android:text="Click here to Fill Biodata" />
+
+    <Button
+        android:id="@+id/lease_land_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lease Land"/>
+
+    <Button
+        android:id="@+id/guarantor_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fill Guarantor info"/>
 
     <Button
         android:id="@+id/sign_out_button"
