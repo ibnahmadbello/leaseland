@@ -35,8 +35,8 @@ public class UserAgreement {
         PackageInfo versionInfo = getPackageInfo();
 
         // the useragreement key changes every time you increment the version number in the Android Manifest.xml
-        String userAgreementKey = AGREEMENT_PREFIX + versionInfo.versionCode;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        final String userAgreementKey = AGREEMENT_PREFIX + versionInfo.versionCode;
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
         boolean hasBeenShownAgreement = sharedPreferences.getBoolean(userAgreementKey, false);
         if (hasBeenShownAgreement == false){
 
@@ -49,6 +49,7 @@ public class UserAgreement {
             AlertDialog.Builder builder = new AlertDialog.Builder(mActivity)
                     .setTitle(title)
                     .setMessage(message)
+                    .setCancelable(false)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

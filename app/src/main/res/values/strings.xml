@@ -18,6 +18,9 @@
     <string name="cancel">Cancel</string>
     <string name="btn_authorize">Authorize</string>
     <string name="agreement_question">Do you agree to the above Terms and Condition?</string>
-    <string name="agreement">1. The Federal Polytechnic Bauchi reserve the right to cancel the allocation at any time it deems fit and no compensation will be paid for whatever spent on the plot allocated.</string>
+    <string name="agreement">1. The Federal Polytechnic Bauchi reserve the right to cancel the allocation at any time it deems fit and no compensation will be paid for whatever spent on the plot allocated.
+        \n2. That all allocation is strictly valid for this farming season only.
+        \n3. That successful applicant is not to temper with polytechnic properties.
+        \n4. The plot should not be sub-let to any one at any given time.</string>
     <string name="agreement_title">Terms and Condition</string>
 </resources>
