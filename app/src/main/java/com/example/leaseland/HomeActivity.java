@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button signOutButton, biodataButton;
+    private Button signOutButton, biodataButton, guarantorButton, leaseLandButton;
     private FirebaseAuth mAuth;
 
     @Override
@@ -27,6 +27,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         signOutButton.setOnClickListener(this);
 
+        guarantorButton = findViewById(R.id.guarantor_button);
+        guarantorButton.setOnClickListener(this);
+
+        leaseLandButton = findViewById(R.id.lease_land_button);
+        leaseLandButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -39,6 +45,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 mAuth.signOut();
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 break;
+            case R.id.guarantor_button:
+                Intent intent = new Intent(this, GuarantorActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.lease_land_button:
+                startActivity(new Intent(this, LeaseLandActivity.class));
+                break;
+
         }
     }
 }
