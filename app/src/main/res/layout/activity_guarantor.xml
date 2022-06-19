@@ -15,6 +15,7 @@
         android:layout_gravity="left"/>
 
     <EditText
+        android:id="@+id/guarantor_full_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Guarantor full name"/>
@@ -26,6 +27,7 @@
         android:layout_gravity="left"/>
 
     <EditText
+        android:id="@+id/guarantor_phone_number_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="0801234567"
@@ -38,6 +40,7 @@
         android:layout_gravity="left"/>
 
     <EditText
+        android:id="@+id/guarantor_email_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter guarantor Email address"
@@ -50,6 +53,7 @@
         android:text="Guarantor Residential Address"/>
 
     <EditText
+        android:id="@+id/guarantor_home_address_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Guarantor Residential Address"
