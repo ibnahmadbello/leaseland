@@ -70,7 +70,9 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Toast.makeText(SignupActivity.this, "Registered successfully !!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
