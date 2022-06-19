@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.biodata_button:
+                //TODO Check if user has biodata first
                 startActivity(new Intent(this, BioDataActivity.class));
                 break;
             case R.id.sign_out_button:
@@ -46,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 break;
             case R.id.guarantor_button:
+                //TODO Check if user has guarantor first
                 Intent intent = new Intent(this, GuarantorActivity.class);
                 startActivity(intent);
                 break;

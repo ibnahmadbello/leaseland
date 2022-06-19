@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BioDataActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full name:"/>
+            android:text="Full name:" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Full Name"/>
+            android:hint="Enter Full Name" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,23 +29,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Are you a Poly Staff?"/>
+                android:text="Are you a Poly Staff?" />
 
             <RadioGroup
                 android:id="@+id/staffOrNot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/yes_staff_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes"/>
+                    android:text="Yes" />
+
                 <RadioButton
                     android:id="@+id/non_staff_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No"/>
+                    android:text="No" />
             </RadioGroup>
 
         </LinearLayout>
@@ -59,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Department"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
         <EditText
@@ -67,105 +65,103 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Department"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/staffId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Staff ID:"
-                android:visibility="gone"/>
+        <TextView
+            android:id="@+id/staffId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Staff ID:"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/enter_staff_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
             android:hint="Staff ID"
-            android:visibility="gone"/>
+            android:inputType="number"
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/placeOfWork"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Place of Work"
-                android:visibility="gone"/>
+        <TextView
+            android:id="@+id/placeOfWork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place of Work"
+            android:visibility="gone" />
 
-            <EditText
-                android:id="@+id/enter_place_of_work"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter place of work"
-                android:visibility="gone"/>
+        <EditText
+            android:id="@+id/enter_place_of_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter place of work"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/residential_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Residential Address"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/enter_residential_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your Residential Address"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone Number"/>
+            android:text="Phone Number" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone Number"
-            android:inputType="phone"/>
+            android:inputType="phone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crops to be grown: (Please check where necessary)"/>
+            android:text="Crops to be grown: (Please check where necessary)" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maize"/>
+            android:text="Maize" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yam"/>
+            android:text="Yam" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Millet"/>
+            android:text="Millet" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beans"/>
+            android:text="Beans" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rice"/>
+            android:text="Rice" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Groundnut"/>
+            android:text="Groundnut" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:text="Save Bio-Data"/>
+            android:text="Save Bio-Data" />
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>
