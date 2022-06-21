@@ -117,7 +117,10 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     private void saveUserInfo() {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
+        fullName = fullNameEditText.getText().toString().trim();
+        phoneNumber = phoneNumberEditText.getText().toString().trim();
         // User info
-        User writeUserDetaills = new User();
+        User writeUserDetaills = new User(fullName, phoneNumber);
+
     }
 }
