@@ -4,17 +4,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class BioDataActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RadioButton yesRadioButton, noRadioButton;
     private RadioGroup staffOrNotRadioGroup;
+    private Button saveButton;
+    private CheckBox maizeCheckBox, yamCheckBox, milletCheckBox, beanCheckBox, riceCheckBox, groundnutCheckBox;
     private TextView departmentTextView, placeOfWorkTextView, residentialAddressTextView, staffIdTextView;
     private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText;
+
+    private String fullName, staffDepartment, staffID, phoneNumber, placeOfWork, residentialAddress;
+    private ArrayList<String> listOfCrop;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +45,11 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         residentialAddressEditText = findViewById(R.id.enter_residential_address);
         placeOfWorkEditText = findViewById(R.id.enter_place_of_work);
 
+        saveButton = findViewById(R.id.save_bio_data);
+
         yesRadioButton.setOnClickListener(this);
         noRadioButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
 
     }
 
