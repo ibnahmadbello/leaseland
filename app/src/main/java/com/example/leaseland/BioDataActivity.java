@@ -1,7 +1,9 @@
 package com.example.leaseland;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +12,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -121,6 +128,24 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         phoneNumber = phoneNumberEditText.getText().toString().trim();
         // User info
         User writeUserDetaills = new User(fullName, phoneNumber);
+
+        DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");
+        referenceUser.child(firebaseUser.getUid()).setValue(writeUserDetaills).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    // TODO: Send user verification
+                    Toast.makeText(BioDataActivity.this, "User profile created successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(BioDataActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(BioDataActivity.this, "User profile registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 }
