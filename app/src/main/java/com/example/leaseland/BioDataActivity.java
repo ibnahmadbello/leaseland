@@ -11,6 +11,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class BioDataActivity extends AppCompatActivity implements View.OnClickListener{
@@ -20,10 +23,12 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     private Button saveButton;
     private CheckBox maizeCheckBox, yamCheckBox, milletCheckBox, beanCheckBox, riceCheckBox, groundnutCheckBox;
     private TextView departmentTextView, placeOfWorkTextView, residentialAddressTextView, staffIdTextView;
-    private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText;
+    private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText, fullNameEditText, phoneNumberEditText;
 
     private String fullName, staffDepartment, staffID, phoneNumber, placeOfWork, residentialAddress;
     private ArrayList<String> listOfCrop;
+
+    FirebaseAuth auth;
 
 
     @Override
@@ -40,6 +45,8 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         residentialAddressTextView = findViewById(R.id.residential_address);
         staffIdTextView = findViewById(R.id.staffId);
 
+        fullNameEditText = findViewById(R.id.applicant_full_name);
+        phoneNumberEditText = findViewById(R.id.applicant_phone_number);
         departmentEditText = findViewById(R.id.enter_department);
         staffIdEditText = findViewById(R.id.enter_staff_id);
         residentialAddressEditText = findViewById(R.id.enter_residential_address);
@@ -47,15 +54,29 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
 
         saveButton = findViewById(R.id.save_bio_data);
 
+        listOfCrop = new ArrayList<>();
+
         yesRadioButton.setOnClickListener(this);
         noRadioButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
+
+        auth = FirebaseAuth.getInstance();
 
     }
 
     @Override
     public void onClick(View view) {
         int selectedID = staffOrNotRadioGroup.getCheckedRadioButtonId();
+        switch (view.getId()){
+            case R.id.save_bio_data:
+                saveUserInfo();
+                break;
+//            case selectedID:
+//                break;
+        }
+
+
+
         if (selectedID == R.id.yes_staff_radio_button){
             departmentTextView.setVisibility(View.VISIBLE);
             departmentEditText.setVisibility(View.VISIBLE);
@@ -91,5 +112,12 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
 //
 //        }
 
+    }
+
+    private void saveUserInfo() {
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        // User info
+        User writeUserDetaills = new User();
     }
 }

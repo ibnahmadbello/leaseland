@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -69,10 +70,14 @@ public class SignupActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Toast.makeText(SignupActivity.this, "Registered successfully !!", Toast.LENGTH_SHORT).show();
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                // TODO
+                                firebaseUser.sendEmailVerification();
                                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override

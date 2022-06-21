@@ -17,6 +17,7 @@
             android:text="Full name:" />
 
         <EditText
+            android:id="@+id/applicant_full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Full Name" />
@@ -116,6 +117,7 @@
             android:text="Phone Number" />
 
         <EditText
+            android:id="@+id/applicant_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone Number"
