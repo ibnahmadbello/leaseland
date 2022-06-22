@@ -46,6 +46,7 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void saveGuarantorInfo() {
+        saveButton.setClickable(false);
         progressBar.setVisibility(View.VISIBLE);
         getGuarantorName = guarantorName.getText().toString().trim();
         getGuarantorAddress = guarantorAddress.getText().toString().trim();

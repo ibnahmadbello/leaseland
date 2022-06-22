@@ -125,6 +125,7 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void saveUserInfo() {
+        saveButton.setClickable(false);
         progressBar.setVisibility(View.VISIBLE);
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -148,6 +149,7 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                 } else {
                     progressBar.setVisibility(View.GONE);
+                    saveButton.setClickable(true);
                     Toast.makeText(BioDataActivity.this, "User profile registration failed. Please try again.", Toast.LENGTH_SHORT).show();
                 }
 
