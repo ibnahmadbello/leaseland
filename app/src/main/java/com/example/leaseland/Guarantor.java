@@ -7,6 +7,13 @@ public class Guarantor {
     private String guarantorEmail;
     private String guarantorResidentialAddress;
 
+    public Guarantor(String guarantorFullName, String guarantorPhoneNumber, String guarantorEmail, String guarantorResidentialAddress) {
+        this.guarantorFullName = guarantorFullName;
+        this.guarantorPhoneNumber = guarantorPhoneNumber;
+        this.guarantorEmail = guarantorEmail;
+        this.guarantorResidentialAddress = guarantorResidentialAddress;
+    }
+
     public String getGuarantorFullName() {
         return guarantorFullName;
     }

@@ -50,9 +50,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void createUser(){
-        signUpButton.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-        String email = mEmail.getText().toString();
+        String email = mEmail.getText().toString().trim();
         String password = mPass.getText().toString();
         String secondPassword = confirmPasswordEditText.getText().toString();
 
@@ -61,6 +59,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             confirmPasswordEditText.requestFocus();
         } else if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             if (!password.isEmpty()){
+                signUpButton.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

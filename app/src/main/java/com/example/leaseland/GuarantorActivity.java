@@ -1,5 +1,6 @@
 package com.example.leaseland;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class GuarantorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,6 +28,8 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
     private Button saveButton;
 
     private String getGuarantorName, getGuarantorPhone, getGuarantorEmail, getGuarantorAddress;
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,8 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
         progressBar = findViewById(R.id.progress_bar);
         saveButton = findViewById(R.id.save_guarantor_info);
 
+        auth = FirebaseAuth.getInstance();
+
         saveButton.setOnClickListener(this);
 
     }
@@ -46,8 +58,8 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void saveGuarantorInfo() {
-        saveButton.setClickable(false);
-        progressBar.setVisibility(View.VISIBLE);
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
         getGuarantorName = guarantorName.getText().toString().trim();
         getGuarantorAddress = guarantorAddress.getText().toString().trim();
         getGuarantorEmail = guarantorEmail.getText().toString().trim();
@@ -72,13 +84,28 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
             guarantorPhone.setError("Enter a valid phone number.");
             guarantorPhone.requestFocus();
         } else {
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(this, "Guarantor Info saved successfully...", Toast.LENGTH_SHORT).show();
-            //TODO Save Guarantor to Firebase
-            Intent intent = new Intent(GuarantorActivity.this, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            Guarantor userGuarantor = new Guarantor(getGuarantorName, getGuarantorPhone, getGuarantorEmail, getGuarantorAddress);
+            DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser/guarantor");
+            saveButton.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            referenceUser.child(firebaseUser.getDisplayName()).child("Guarantor").setValue(userGuarantor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(GuarantorActivity.this, "Guarantor Info saved successfully...", Toast.LENGTH_SHORT).show();
+                        //TODO Save Guarantor to Firebase
+                        Intent intent = new Intent(GuarantorActivity.this, HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        saveButton.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(GuarantorActivity.this, "Guarantor Info could not be saved successfully... Try again.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
         }
     }
 }

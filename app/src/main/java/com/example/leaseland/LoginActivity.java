@@ -49,13 +49,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginUser(){
-        signInButton.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
         String email = mEmail.getText().toString().trim();
         String password = mPass.getText().toString();
 
+
         if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             if (!password.isEmpty()){
+                signInButton.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override

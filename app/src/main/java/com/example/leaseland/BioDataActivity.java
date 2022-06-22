@@ -125,8 +125,6 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void saveUserInfo() {
-        saveButton.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
@@ -134,8 +132,9 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         phoneNumber = phoneNumberEditText.getText().toString().trim();
         // User info
         User writeUserDetaills = new User(fullName, phoneNumber);
-
         DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");
+        saveButton.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         referenceUser.child(firebaseUser.getUid()).setValue(writeUserDetaills).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
