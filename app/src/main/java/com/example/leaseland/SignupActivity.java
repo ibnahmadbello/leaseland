@@ -50,7 +50,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void createUser(){
-        signUpButton.setClickable(false);
+        signUpButton.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         String email = mEmail.getText().toString();
         String password = mPass.getText().toString();
@@ -80,7 +80,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.GONE);
-                        signUpButton.setClickable(true);
+                        signUpButton.setVisibility(View.VISIBLE);
                         Toast.makeText(SignupActivity.this, "Registration Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });

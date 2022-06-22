@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginUser(){
-        signInButton.setClickable(false);
+        signInButton.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         String email = mEmail.getText().toString().trim();
         String password = mPass.getText().toString();
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.GONE);
-                        signInButton.setClickable(true);
+                        signInButton.setVisibility(View.VISIBLE);
                         Toast.makeText(LoginActivity.this, "Login Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });
