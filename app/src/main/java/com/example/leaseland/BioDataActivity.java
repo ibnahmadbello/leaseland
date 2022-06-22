@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     private RadioButton yesRadioButton, noRadioButton;
     private RadioGroup staffOrNotRadioGroup;
     private Button saveButton;
+    private ProgressBar progressBar;
     private CheckBox maizeCheckBox, yamCheckBox, milletCheckBox, beanCheckBox, riceCheckBox, groundnutCheckBox;
     private TextView departmentTextView, placeOfWorkTextView, residentialAddressTextView, staffIdTextView;
     private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText, fullNameEditText, phoneNumberEditText;
@@ -60,6 +62,7 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         placeOfWorkEditText = findViewById(R.id.enter_place_of_work);
 
         saveButton = findViewById(R.id.save_bio_data);
+        progressBar = findViewById(R.id.progress_bar);
 
         listOfCrop = new ArrayList<>();
 
@@ -122,6 +125,8 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void saveUserInfo() {
+        progressBar.setVisibility(View.VISIBLE);
+
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         fullName = fullNameEditText.getText().toString().trim();
@@ -135,12 +140,14 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     // TODO: Send user verification
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(BioDataActivity.this, "User profile created successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(BioDataActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(BioDataActivity.this, "User profile registration failed. Please try again.", Toast.LENGTH_SHORT).show();
                 }
 

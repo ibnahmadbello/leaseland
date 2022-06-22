@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +20,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText mEmail, mPass, confirmPasswordEditText;
     private TextView mTextView;
     private Button signUpButton;
+    private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
 
@@ -40,22 +42,15 @@ public class SignupActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createUser();
-            }
-        });
+        progressBar = findViewById(R.id.progress_bar);
 
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-            }
-        });
+        signUpButton.setOnClickListener(this);
+
+        mTextView.setOnClickListener(this);
     }
 
     private void createUser(){
+        progressBar.setVisibility(View.VISIBLE);
         String email = mEmail.getText().toString();
         String password = mPass.getText().toString();
         String secondPassword = confirmPasswordEditText.getText().toString();
@@ -69,10 +64,11 @@ public class SignupActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(SignupActivity.this, "Registered successfully !!", Toast.LENGTH_SHORT).show();
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                //FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 // TODO
-                                firebaseUser.sendEmailVerification();
+                                //firebaseUser.sendEmailVerification();
                                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
@@ -82,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(SignupActivity.this, "Registration Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -92,6 +89,18 @@ public class SignupActivity extends AppCompatActivity {
             mEmail.setError("Empty fields are not allowed");
         } else {
             mEmail.setError("Please enter a valid email address");
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.login_link:
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                break;
+            case R.id.register_button:
+                createUser();
+                break;
         }
     }
 }

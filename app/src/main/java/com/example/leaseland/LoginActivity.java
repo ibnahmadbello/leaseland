@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEmail, mPass;
     private TextView mTextView, forgetPasswordTextView;
     private Button signInButton;
+    private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
 
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
+        progressBar = findViewById(R.id.progress_bar);
+
         forgetPasswordTextView.setOnClickListener(this);
         mTextView.setOnClickListener(this);
         signInButton.setOnClickListener(this);
@@ -45,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void loginUser(){
+        progressBar.setVisibility(View.VISIBLE);
         String email = mEmail.getText().toString();
         String password = mPass.getText().toString();
 
@@ -54,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(LoginActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
@@ -61,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(LoginActivity.this, "Login Failed !!", Toast.LENGTH_SHORT).show();
                     }
                 });

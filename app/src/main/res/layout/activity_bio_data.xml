@@ -165,6 +165,13 @@
             android:layout_gravity="bottom|center"
             android:text="Save Bio-Data" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 
 </ScrollView>
