@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class BioDataActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public static final String BIO_PREF = "BioDataFile";
     private RadioButton yesRadioButton, noRadioButton;
     private RadioGroup staffOrNotRadioGroup;
     private Button saveButton;
@@ -148,6 +150,9 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
                     // TODO: Send user verification
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(BioDataActivity.this, "User profile created successfully", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = getSharedPreferences(BIO_PREF, MODE_PRIVATE).edit();
+                    editor.putBoolean("savedBioData", true);
+                    editor.apply();
                     Intent intent = new Intent(BioDataActivity.this, HomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

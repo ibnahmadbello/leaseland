@@ -56,7 +56,7 @@ public class UserAgreement {
                             // Mark as read
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean(userAgreementKey, true);
-                            editor.commit();
+                            editor.apply();
                             dialogInterface.dismiss();
                         }
                     })
@@ -68,5 +68,9 @@ public class UserAgreement {
                     });
             builder.create().show();
         }
+    }
+
+    public void showBioDataQuestion(){
+
     }
 }

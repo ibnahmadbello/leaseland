@@ -3,13 +3,14 @@ package com.example.leaseland;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button signOutButton, biodataButton, guarantorButton, leaseLandButton;
     private FirebaseAuth mAuth;
@@ -37,10 +38,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.biodata_button:
                 //TODO Check if user has biodata first
-                startActivity(new Intent(this, BioDataActivity.class));
+                SharedPreferences preferences = getSharedPreferences(BioDataActivity.BIO_PREF, MODE_PRIVATE);
+                boolean getSavedState = preferences.getBoolean("savedBioData", false);
+                if (getSavedState) {
+
+                } else {
+                    startActivity(new Intent(this, BioDataActivity.class));
+                }
                 break;
             case R.id.sign_out_button:
                 mAuth.signOut();
