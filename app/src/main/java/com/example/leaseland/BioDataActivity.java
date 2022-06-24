@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -130,6 +131,11 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
 
         fullName = fullNameEditText.getText().toString().trim();
         phoneNumber = phoneNumberEditText.getText().toString().trim();
+
+//        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
+//        firebaseUser.updateProfile(profileChangeRequest);
+
+
         // User info
         User writeUserDetaills = new User(fullName, phoneNumber);
         DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");

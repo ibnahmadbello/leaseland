@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -84,11 +85,14 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
             guarantorPhone.setError("Enter a valid phone number.");
             guarantorPhone.requestFocus();
         } else {
-            Guarantor userGuarantor = new Guarantor(getGuarantorName, getGuarantorPhone, getGuarantorEmail, getGuarantorAddress);
-            DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser/guarantor");
+
             saveButton.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.VISIBLE);
-            referenceUser.child(firebaseUser.getDisplayName()).child("Guarantor").setValue(userGuarantor).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            Guarantor userGuarantor = new Guarantor(getGuarantorName, getGuarantorPhone, getGuarantorEmail, getGuarantorAddress);
+            DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");
+
+            referenceUser.child(firebaseUser.getUid()).child("Guarantor").setValue(userGuarantor).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
