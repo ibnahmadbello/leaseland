@@ -23,4 +23,10 @@
         \n3. That successful applicant is not to temper with polytechnic properties.
         \n4. The plot should not be sub-let to any one at any given time.</string>
     <string name="agreement_title">Terms and Condition</string>
+    <string name="bio_data_title">Bio Data Update</string>
+    <string name="bio_data">"You have already filled your bio-data. "</string>
+    <string name="bio_data_question">Do you want to update your Bio-Data?</string>
+    <string name="guarantor_title">Update Guarantor</string>
+    <string name="guarantor_question">Do you want to update your Guarantor Information?</string>
+    <string name="guarantor">You have submitted your guarantor information.</string>
 </resources>
