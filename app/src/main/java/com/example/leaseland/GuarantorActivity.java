@@ -1,9 +1,12 @@
 package com.example.leaseland;
 
+import static com.example.leaseland.BioDataActivity.BIO_PREF;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -98,6 +101,9 @@ public class GuarantorActivity extends AppCompatActivity implements View.OnClick
                     if (task.isSuccessful()){
                         Toast.makeText(GuarantorActivity.this, "Guarantor Info saved successfully...", Toast.LENGTH_SHORT).show();
                         //TODO Save Guarantor to Firebase
+                        SharedPreferences.Editor editor = getSharedPreferences(BIO_PREF, MODE_PRIVATE).edit();
+                        editor.putBoolean("savedGuarantorData", true);
+                        editor.apply();
                         Intent intent = new Intent(GuarantorActivity.this, HomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

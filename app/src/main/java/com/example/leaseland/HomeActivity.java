@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button signOutButton, biodataButton, guarantorButton, leaseLandButton;
     private FirebaseAuth mAuth;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         leaseLandButton = findViewById(R.id.lease_land_button);
         leaseLandButton.setOnClickListener(this);
 
+        preferences = getSharedPreferences(BioDataActivity.BIO_PREF, MODE_PRIVATE);
+
     }
 
     @Override
@@ -45,9 +48,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.biodata_button:
                 //TODO Check if user has biodata first
-                SharedPreferences preferences = getSharedPreferences(BioDataActivity.BIO_PREF, MODE_PRIVATE);
-                boolean getSavedState = preferences.getBoolean("savedBioData", false);
-                if (getSavedState) {
+                boolean getBioDataState = preferences.getBoolean("savedBioData", false);
+                if (getBioDataState) {
                     new UserAgreement(this).showBioDataQuestion();
                 } else {
                     startActivity(new Intent(this, BioDataActivity.class));
@@ -59,8 +61,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.guarantor_button:
                 //TODO Check if user has guarantor first
-                Intent intent = new Intent(this, GuarantorActivity.class);
-                startActivity(intent);
+                boolean getGuarantorState = preferences.getBoolean("savedGuarantorData", false);
+                if (getGuarantorState) {
+                    new UserAgreement(this).showGuarantorQuestion();
+                } else{
+                    Intent intent = new Intent(this, GuarantorActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.lease_land_button:
                 startActivity(new Intent(this, LeaseLandActivity.class));
