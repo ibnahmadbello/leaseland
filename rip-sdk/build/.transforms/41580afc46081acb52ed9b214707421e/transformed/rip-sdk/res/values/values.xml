@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="avs_failed_bg">#FFC9C9</color>
+    <color name="avs_success_bg">#dfe9e8</color>
+    <color name="colorAccent">#F57C00</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorButtonSelected">#b35901</color>
+    <color name="colorButtonUnSelected">#cc6601</color>
+    <color name="colorDarkGreen">#0c8078</color>
+    <color name="colorDarkGrey">#666</color>
+    <color name="colorHapticGreen">#0d6e68</color>
+    <color name="colorOrange">#F5831F</color>
+    <color name="colorPrimary">#F57C00</color>
+    <color name="colorPrimaryAction">#F57C00</color>
+    <color name="colorPrimaryDark">#CB6728</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="colorSilver">#BDC3C7</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorWhite">#ddffffff</color>
+    <color name="colorWhiteSolid">#ffffff</color>
+    <color name="errorMessage">#C91616</color>
+    <color name="errorMessageBackground">#FFC9C9</color>
+    <color name="light_gray">#efefef</color>
+    <color name="lighter_gray">#f9f9f9</color>
+    <dimen name="large_padding">24dp</dimen>
+    <dimen name="large_text">24sp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="medium_padding1">18dp</dimen>
+    <dimen name="medium_padding2">20dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="small_text_size">14dp</dimen>
+    <dimen name="tiny_text">10sp</dimen>
+    <dimen name="very_small_padding">4dp</dimen>
+    <dimen name="xlarge_padding">32dp</dimen>
+    <dimen name="xxlarge_padding">64dp</dimen>
+    <dimen name="xxxlarge_padding">96dp</dimen>
+    <string name="_000">000</string>
+    <string name="_0000000000">0000000000</string>
+    <string name="_0000_0000_0000_0000">0000 0000 0000 0000</string>
+    <string name="account_number">Account Number</string>
+    <string name="amount_due">AMOUNT DUE</string>
+    <string name="amount_placeholder">₦</string>
+    <string name="app_name">RemitaInlineSDK</string>
+    <string name="bank_icon">Bank icon</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_">CANCEL</string>
+    <string name="card_number">Card Number</string>
+    <string name="card_pin">Card Pin</string>
+    <string name="card_pin_">Card Pin</string>
+    <string name="close">Close</string>
+    <string name="close_">Close</string>
+    <string name="close_icon">Close icon</string>
+    <string name="continue_">CONTINUE</string>
+    <string name="cvv">CVV</string>
+    <string name="error_retrieving_data">Error Retrieving Data</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="invalid_accno_prompt">Please enter a valid Account No.</string>
+    <string name="john_doe_android">JOHN DOE ANDROID</string>
+    <string name="kenneth_cole_brown_leather_raction_colombian_leather_duffel_bag">Kenneth Cole Brown Leather Raction Colombian Leather Duffel Bag</string>
+    <string name="merchant_item">Merchant item</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="name_of_bank">Name of Bank</string>
+    <string name="name_on_account">Name on Bank Record</string>
+    <string name="oops">Oops</string>
+    <string name="otp_icon">OTP Icon</string>
+    <string name="pay">PAY</string>
+    <string name="payment_failed">Payment failed</string>
+    <string name="payment_successful_">PAYMENT SUCCESSFUL</string>
+    <string name="pin_holder">****</string>
+    <string name="pin_holder_">****</string>
+    <string name="powered_by_remita">Powered by Remita</string>
+    <string name="proceed_">PROCEED</string>
+    <string name="select_bank">Select Bank</string>
+    <string name="success_icon">Success Icon</string>
+    <string name="transactionId">remitacihMU</string>
+    <string name="zenith_bank">Zenith Bank</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:actionBarTabStyle">@style/RemitaSDKTheme.ActionBar.Tab</item>
+        <!--<item name="android:actionBarDivider">@color/vela_blue_dark</item>-->
+    </style>
+    <style name="RemitaAppTheme" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlActivated">@color/colorOrange</item>
+        <item name="colorControlHighlight">@color/colorOrange</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+
+
+    </style>
+    <style name="RemitaSDKTheme.ActionBar.Tab" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/remita_sdk_tab_color_selector</item>
+    </style>
+</resources>

@@ -25,5 +25,13 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.generateRRR:
+                //TODO
+                break;
+            case R.id.webviewRRR:
+                //TODO
+                break;
+        }
     }
 }

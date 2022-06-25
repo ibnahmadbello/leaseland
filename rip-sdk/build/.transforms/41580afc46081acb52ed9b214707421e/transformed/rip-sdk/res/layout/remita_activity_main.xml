@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/remita_initiate_payment_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/medium_padding">
+
+    <ImageView
+        android:layout_width="271dp"
+        android:layout_height="234dp"
+        android:layout_gravity="center"
+        android:src="@drawable/remita" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingTop="25dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="25dp"
+        android:text="Want to quickly see how to easily process an RRR?\n\nEnter an RRR below"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorBlack" />
+<!--    android:text="Want to quickly see how to easily process an RRR?\n\nEnter or Generate an RRR below"-->
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_padding"
+        android:gravity="center"
+        android:text="RRR"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/large_text"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etRRR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Enter Amount"
+        android:inputType="numberDecimal"
+        android:maxLength="12"
+        android:text="230008237211"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/large_text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnGenRRR"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/small_padding"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:background="@color/colorPrimary"
+            android:text="GEN RRR"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/medium_padding" />
+
+        <Button
+            android:id="@+id/btnProcessRRR"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_margin="@dimen/small_padding"
+            android:layout_weight="1"
+            android:background="@color/colorHapticGreen"
+            android:text="PROCESS RRR"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/medium_padding" />
+    </LinearLayout>
+</LinearLayout>

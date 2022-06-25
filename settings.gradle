@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "LeaseLand"
-include ':app'
+include ':app', ':rip-sdk'
