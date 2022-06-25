@@ -66,6 +66,7 @@ public class UserAgreement {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             mActivity.finish();
+                            dialogInterface.dismiss();
                         }
                     });
             builder.create().show();
@@ -93,7 +94,7 @@ public class UserAgreement {
 //                            SharedPreferences.Editor editor = sharedPreferences.edit();
 //                            editor.putBoolean(userAgreementKey, true);
 //                            editor.apply();
-//                            dialogInterface.dismiss();
+                            dialogInterface.dismiss();
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -126,7 +127,7 @@ public class UserAgreement {
 //                            SharedPreferences.Editor editor = sharedPreferences.edit();
 //                            editor.putBoolean(userAgreementKey, true);
 //                            editor.apply();
-//                            dialogInterface.dismiss();
+                            dialogInterface.dismiss();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
