@@ -15,12 +15,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText mEmail, mPass;
+    private TextInputEditText mEmail, mPass;
     private TextView mTextView, forgetPasswordTextView;
     private Button signInButton;
     private ProgressBar progressBar;
