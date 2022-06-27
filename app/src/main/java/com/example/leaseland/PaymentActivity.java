@@ -2,6 +2,7 @@ package com.example.leaseland;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.remita.paymentsdk.listener.RemitaGatewayPaymentResponseListener;
 import com.remita.paymentsdk.module.MainActivity;
 import com.remita.paymentsdk.util.JsonUtil;
 import com.remita.paymentsdk.util.RIPGateway;
+
+import java.util.Date;
 
 public class PaymentActivity extends AppCompatActivity implements View.OnClickListener, RemitaGatewayPaymentResponseListener {
 
@@ -44,7 +47,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 //TODO
                 String url = RIPGateway.Endpoint.DEMO;
                 String api_key = "QzAwMDAxNjMwNzl8NDA4NDEyMjQ0MHw0ODZkYTZkOTE4NTVhNzMzZmIzZTM5MTU2ZDBjZDYxY2Y4MzY4ODQ1NzRkYzIyOTI2OWQzMTU1M2NlNzdkNGZkZGIyNjI1MzA1ZjZkNzkzYzM2NTE4NzUxNTI0OWVjYjAxODUyNGZmYTM3NjY3M2IwZWNjYTU3OWEwYjE5NGMyNQ==";
-                String rrr = "220673497853";
+                String rrr = "280008392172";
 
 
                 remitaInlinePaymentSDK.setRemitaGatewayPaymentResponseListener(PaymentActivity.this);
@@ -57,5 +60,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     public void onPaymentCompleted(PaymentResponse paymentResponse) {
         Log.v("+++ Response: ", JsonUtil.toJson(paymentResponse));
         Toast.makeText(this, JsonUtil.toJson(paymentResponse), Toast.LENGTH_SHORT).show();
+        if (paymentResponse.getResponseMessage()=="SUCCESS")
+            startActivity(new Intent(this, HomeActivity.class));
     }
 }
