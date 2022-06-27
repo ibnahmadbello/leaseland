@@ -16,6 +16,9 @@ import com.remita.paymentsdk.module.MainActivity;
 import com.remita.paymentsdk.util.JsonUtil;
 import com.remita.paymentsdk.util.RIPGateway;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 public class PaymentActivity extends AppCompatActivity implements View.OnClickListener, RemitaGatewayPaymentResponseListener {
@@ -42,6 +45,45 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.generateRRR:
                 //TODO
+                String merchantId = "2547916";
+                String apiKey = "1946";
+                String serviceTypeId = "4430731";
+                Date d = new Date();
+                long orderId = d.getTime();
+                String totalAmount = "1000";
+                try {
+                    MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+                    String input = merchantId+ serviceTypeId+ orderId+totalAmount+apiKey;
+                    byte[] md = messageDigest.digest(input.getBytes());
+                    BigInteger no = new BigInteger(1, md);
+                    String hashInput = no.toString(16);
+                    while (hashInput.length() < 32){
+                        hashInput = "0" + hashInput;
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    Log.d("Hash Error", e.getMessage());
+                    Toast.makeText(this, "Hash error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+//                var apiHash = CryptoJS.SHA512(merchantId+ serviceTypeId+ orderId+totalAmount+apiKey);
+//            {
+//                "serviceTypeId": "{{serviceTypeId}}",
+//                    "amount": "{{totalAmount}}",
+//                    "orderId": "{{orderId}}",
+//                    "payerName": "Michelle Alozie",
+//                    "payerEmail": "alozie@systemspecs.com.ng",
+//                    "payerPhone": "09062067384",
+//                    "description": "Payment for Donation 3",
+//                    "customFields":[{
+//                "name":"Matric Number",
+//                        "value":"1509329285795",
+//                        "type":"ALL"
+//            },
+//                {
+//                    "name":"Invoice Number",
+//                        "value":"1234",
+//                        "type":"ALL"
+//                }]
+//            }
                 break;
             case R.id.webviewRRR:
                 //TODO
