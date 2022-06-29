@@ -1,8 +1,10 @@
 package com.example.leaseland;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -16,6 +18,8 @@ import com.remita.paymentsdk.listener.RemitaGatewayPaymentResponseListener;
 import com.remita.paymentsdk.util.JsonUtil;
 import com.remita.paymentsdk.util.RIPGateway;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +29,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Date;
 
 import okhttp3.Call;
@@ -39,11 +44,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView generateRRR, webviewRRR;
     RemitaInlinePaymentSDK remitaInlinePaymentSDK;
-//    public String url= "https://reqres.in/api/users/2";
     String url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/paymentinit";
-    String returnedHash = "";
-    String merchantId = "";
-    long orderId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,35 +60,42 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         remitaInlinePaymentSDK = RemitaInlinePaymentSDK.getInstance();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.generateRRR:
                 //TODO
-                merchantId = "2547916";
+                String merchantId = "2547916";
                 String apiKey = "1946";
                 String serviceTypeId = "4430731";
                 Date d = new Date();
-                orderId = d.getTime();
+                long orderId = d.getTime();
                 String totalAmount = "1000";
-                try {
+
+//                try {
                     String input = merchantId+ serviceTypeId+ orderId+totalAmount+apiKey;
-                    MessageDigest md = MessageDigest.getInstance("SHA-512");
-                    byte[] messageDigest = md.digest(input.getBytes());
-                    // Convert byte array into signum representation
-                    BigInteger no = new BigInteger(1, messageDigest);
-                    String returnedHash = no.toString(16);
-                    while (returnedHash.length() < 32){
-                        returnedHash = "0" + returnedHash;
-                    }
-                    Toast.makeText(this, "+++"+ returnedHash, Toast.LENGTH_SHORT).show();
-                } catch (NoSuchAlgorithmException e) {
-                    Log.d("Hash Error", e.getMessage());
-                    Toast.makeText(this, "Hash error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                    MessageDigest messageDigest = DigestUtils.getDigest("SHA-512");
+                    byte[] hashedBytes = messageDigest.digest(input.getBytes(StandardCharsets.UTF_8));
+                    String hashedValue = Hex.encodeHexString(hashedBytes);
+//                    byte[] sha512 = DigestUtils.sha512(input);
+//                String sha512Hex = Arrays.toString(sha512);
+//                    MessageDigest md = MessageDigest.getInstance("SHA-512");
+//                    byte[] messageDigest = md.digest(input.getBytes());
+//                    // Convert byte array into signum representation
+//                    BigInteger no = new BigInteger(1, messageDigest);
+//                    String returnedHash = no.toString(16);
+//                    while (returnedHash.length() < 32){
+//                        returnedHash = "0" + returnedHash;
+//                    }
+//                    Toast.makeText(this, "+++"+ returnedHash, Toast.LENGTH_SHORT).show();
+//                } catch (NoSuchAlgorithmException e) {
+//                    Log.d("Hash Error", e.getMessage());
+//                    Toast.makeText(this, "Hash error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
 
                 try {
-                    run();
+                    run(hashedValue, orderId, merchantId);
                 } catch (IOException e){
                     e.printStackTrace();
                 }
@@ -97,7 +105,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 //TODO
                 String url = RIPGateway.Endpoint.DEMO;
                 String api_key = "QzAwMDAxNjMwNzl8NDA4NDEyMjQ0MHw0ODZkYTZkOTE4NTVhNzMzZmIzZTM5MTU2ZDBjZDYxY2Y4MzY4ODQ1NzRkYzIyOTI2OWQzMTU1M2NlNzdkNGZkZGIyNjI1MzA1ZjZkNzkzYzM2NTE4NzUxNTI0OWVjYjAxODUyNGZmYTM3NjY3M2IwZWNjYTU3OWEwYjE5NGMyNQ==";
-                String rrr = "280008392172";
+                String rrr = "310008394238";
 
 
                 remitaInlinePaymentSDK.setRemitaGatewayPaymentResponseListener(PaymentActivity.this);
@@ -118,7 +126,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         return hexString.toString();
     }
 
-    void run() throws IOException{
+    void run(String returnedHash, long orderId, String merchantId) throws IOException{
         OkHttpClient client = new OkHttpClient();
 
         JSONObject bodyPost = new JSONObject();
@@ -140,11 +148,8 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
-//                .method("POST", body)
                 .header("Content-Type", "application/json")
-//                .header("Accept", "application/json")
                 .header("Authorization", "remitaConsumerKey="+merchantId+",remitaConsumerToken="+returnedHash+"")
-//                .header("Authorization", remitaConsumerToken)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
