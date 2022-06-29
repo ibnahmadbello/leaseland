@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BioDataActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -137,34 +139,51 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
 //        UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(fullName).build();
 //        firebaseUser.updateProfile(profileChangeRequest);
 
+        // Validate phone number
+        String mobileRegex =  "[0][7-9][0-9]{9}";
+        Matcher mobileMatcher;
+        Pattern mobilePattern = Pattern.compile(mobileRegex);
+        mobileMatcher = mobilePattern.matcher(phoneNumber);
 
-        // User info
-        User writeUserDetaills = new User(fullName, phoneNumber);
-        DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");
-        saveButton.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-        referenceUser.child(firebaseUser.getUid()).setValue(writeUserDetaills).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    // TODO: Send user verification
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(BioDataActivity.this, "User profile created successfully", Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor editor = getSharedPreferences(BIO_PREF, MODE_PRIVATE).edit();
-                    editor.putBoolean("savedBioData", true);
-                    editor.apply();
-                    Intent intent = new Intent(BioDataActivity.this, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                    saveButton.setVisibility(View.VISIBLE);
-                    Toast.makeText(BioDataActivity.this, "User profile registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+        if (phoneNumber.length() != 11){
+            Toast.makeText(this, "Please re-enter your mobile number", Toast.LENGTH_SHORT).show();
+            phoneNumberEditText.setError("Mobile number should be 11 digit");
+            phoneNumberEditText.requestFocus();
+        }else if (!mobileMatcher.find()){
+            Toast.makeText(this, "Please re-enter your mobile number", Toast.LENGTH_SHORT).show();
+            phoneNumberEditText.setError("Phone number is not valid");
+            phoneNumberEditText.requestFocus();
+        } else {
+            // User info
+            User writeUserDetaills = new User(fullName, phoneNumber);
+            DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("registeredUser");
+            saveButton.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            referenceUser.child(firebaseUser.getUid()).setValue(writeUserDetaills).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        // TODO: Send user verification
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(BioDataActivity.this, "User profile created successfully", Toast.LENGTH_SHORT).show();
+                        SharedPreferences.Editor editor = getSharedPreferences(BIO_PREF, MODE_PRIVATE).edit();
+                        editor.putBoolean("savedBioData", true);
+                        editor.apply();
+                        Intent intent = new Intent(BioDataActivity.this, HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        saveButton.setVisibility(View.VISIBLE);
+                        Toast.makeText(BioDataActivity.this, "User profile registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+            });
 
-            }
-        });
+        }
+
 
     }
 }
