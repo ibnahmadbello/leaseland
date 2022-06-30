@@ -3,12 +3,14 @@ package com.example.leaseland;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,11 +40,12 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
     private ProgressBar progressBar;
     private CheckBox maizeCheckBox, yamCheckBox, milletCheckBox, beanCheckBox, riceCheckBox, groundnutCheckBox;
     private TextView departmentTextView, placeOfWorkTextView, residentialAddressTextView, staffIdTextView;
-    private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText, fullNameEditText, phoneNumberEditText;
+    private EditText departmentEditText, staffIdEditText, residentialAddressEditText, placeOfWorkEditText, fullNameEditText, phoneNumberEditText, dob;
 
     private String fullName, staffDepartment, staffID, phoneNumber, placeOfWork, residentialAddress;
     private ArrayList<String> listOfCrop;
 
+    private DatePickerDialog pickerDialog;
     FirebaseAuth auth;
 
 
@@ -65,6 +69,7 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         staffIdEditText = findViewById(R.id.enter_staff_id);
         residentialAddressEditText = findViewById(R.id.enter_residential_address);
         placeOfWorkEditText = findViewById(R.id.enter_place_of_work);
+        dob = findViewById(R.id.dob);
 
         saveButton = findViewById(R.id.save_bio_data);
         progressBar = findViewById(R.id.progress_bar);
@@ -74,8 +79,11 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         yesRadioButton.setOnClickListener(this);
         noRadioButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
-
+        // Setting up DatePicker on EditText
+        dob.setOnClickListener(this);
         auth = FirebaseAuth.getInstance();
+
+
 
     }
 
@@ -85,6 +93,19 @@ public class BioDataActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.save_bio_data:
                 saveUserInfo();
+                break;
+            case R.id.dob:
+                final Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+                pickerDialog = new DatePickerDialog(BioDataActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dob.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+                pickerDialog.show();
                 break;
 //            case selectedID:
 //                break;

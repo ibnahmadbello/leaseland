@@ -123,6 +123,14 @@
             android:hint="Phone Number"
             android:inputType="phone" />
 
+        <EditText
+            android:id="@+id/dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="Date of Birth"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
