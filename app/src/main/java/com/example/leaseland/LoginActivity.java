@@ -100,9 +100,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_button:
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                 if (firebaseUser != null) {
-//                    checkIfEmailVerified(firebaseUser);
+                    checkIfEmailVerified(firebaseUser);
                 }
-                loginUser();
                 break;
         }
     }

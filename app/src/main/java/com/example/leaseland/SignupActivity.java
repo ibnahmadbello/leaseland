@@ -66,28 +66,30 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                progressBar.setVisibility(View.GONE);
-                                if (firebaseUser != null) {
-                                    firebaseUser.sendEmailVerification().addOnCompleteListener(SignupActivity.this, new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Toast.makeText(SignupActivity.this, "Verification email sent to "+ firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(SignupActivity.this, "Failed to send verification", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                }
-                                Toast.makeText(SignupActivity.this, "Registered successfully !!", Toast.LENGTH_SHORT).show();
-                                //FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                // TODO
+                                if (task.isSuccessful()){
+                                    FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                    progressBar.setVisibility(View.GONE);
+                                    if (firebaseUser != null) {
+                                        firebaseUser.sendEmailVerification().addOnCompleteListener(SignupActivity.this, new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+                                                    Toast.makeText(SignupActivity.this, "Registered successfully !! \nVerification email sent to "+ firebaseUser.getEmail(), Toast.LENGTH_SHORT).show();
+                                                    // TODO
 
-                                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+                                                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(SignupActivity.this, "Failed to send verification", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                    }
+
+
+                                }
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
