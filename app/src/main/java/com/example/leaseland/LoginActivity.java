@@ -15,8 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,22 +64,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signInButton.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
-                            public void onSuccess(AuthResult authResult) {
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(LoginActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.GONE);
-                        signInButton.setVisibility(View.VISIBLE);
-                        Toast.makeText(LoginActivity.this, "Login Failed !!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()){
+                                        if (mAuth.getCurrentUser().isEmailVerified()){
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(LoginActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                            finish();
+                                        } else {
+                                            progressBar.setVisibility(View.GONE);
+                                            showAlertDialog();
+                                        }
+                                    } else{
+                                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                }
+
+
+
+                        });
+
             } else {
                 mPass.setError("Empty Fields are not Allowed");
             }

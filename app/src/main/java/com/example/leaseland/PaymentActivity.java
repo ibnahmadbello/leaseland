@@ -1,5 +1,6 @@
 package com.example.leaseland;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +45,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
     private TextView generateRRR, webviewRRR;
     RemitaInlinePaymentSDK remitaInlinePaymentSDK;
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String url = "https://remitademo.net/remita/exapp/api/v1/send/api/echannelsvc/merchant/api/paymentinit";
 
     @Override
@@ -73,33 +75,22 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 long orderId = d.getTime();
                 String totalAmount = "1000";
 
-//                try {
-                    String input = merchantId+ serviceTypeId+ orderId+totalAmount+apiKey;
-                    MessageDigest messageDigest = DigestUtils.getDigest("SHA-512");
-                    byte[] hashedBytes = messageDigest.digest(input.getBytes(StandardCharsets.UTF_8));
-                    String hashedValue = Hex.encodeHexString(hashedBytes);
-//                    byte[] sha512 = DigestUtils.sha512(input);
-//                String sha512Hex = Arrays.toString(sha512);
-//                    MessageDigest md = MessageDigest.getInstance("SHA-512");
-//                    byte[] messageDigest = md.digest(input.getBytes());
-//                    // Convert byte array into signum representation
-//                    BigInteger no = new BigInteger(1, messageDigest);
-//                    String returnedHash = no.toString(16);
-//                    while (returnedHash.length() < 32){
-//                        returnedHash = "0" + returnedHash;
-//                    }
-//                    Toast.makeText(this, "+++"+ returnedHash, Toast.LENGTH_SHORT).show();
-//                } catch (NoSuchAlgorithmException e) {
-//                    Log.d("Hash Error", e.getMessage());
-//                    Toast.makeText(this, "Hash error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
 
-                try {
-                    run(hashedValue, orderId, merchantId);
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
-//                var apiHash = CryptoJS.SHA512(merchantId+ serviceTypeId+ orderId+totalAmount+apiKey);
+            String postUrl = "";
+            String postBody = "{\n" + "\"amount\": \"1000\",\n" +
+                    "\"payerName\": \"Arab\",\n" +
+                    "\"payerEmail\": \"arabregent@gmail.com\",\n" +
+                    "\"payerPhone\": \"08147847855\",\n" +
+                    "\"description\": \"Payment for land leasing\"\n" + "}";
+
+
+            try {
+                postRequest(postUrl, postBody);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+
                 break;
             case R.id.webviewRRR:
                 //TODO
@@ -112,6 +103,26 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 remitaInlinePaymentSDK.initiatePayment(PaymentActivity.this, url, api_key, rrr);
                 break;
         }
+    }
+
+    private void postRequest(String postUrl, String postBody) throws IOException {
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(postBody, JSON);
+        Request request = new Request.Builder().url(postUrl).post(requestBody).build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                Toast.makeText(PaymentActivity.this, "+++++"+response.body(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private String bytesToHex(byte[] bytes) {
