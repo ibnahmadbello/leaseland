@@ -62,18 +62,12 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         remitaInlinePaymentSDK = RemitaInlinePaymentSDK.getInstance();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.generateRRR:
                 //TODO
             String postUrl = "https://aqueous-waters-90678.herokuapp.com/";
-//            String postBody = "{\n" + "\"amount\": \"1000\",\n" +
-//                    "\"payerName\": \"Arab\",\n" +
-//                    "\"payerEmail\": \"arabregent@gmail.com\",\n" +
-//                    "\"payerPhone\": \"08147847855\",\n" +
-//                    "\"description\": \"Payment for land leasing\"\n" + "}";
 
                 JSONObject bodyPost = new JSONObject();
                 try {
@@ -91,8 +85,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             } catch (IOException e){
                 e.printStackTrace();
             }
-
-
                 break;
             case R.id.webviewRRR:
                 //TODO
@@ -126,11 +118,14 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
                 final String myResponse = response.body().string();
+                String[] responseArray = myResponse.split(",");
+                String rrr = responseArray[1];
+                String userRRR = rrr.substring(6);
 
                 PaymentActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(PaymentActivity.this, "---"+myResponse, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+userRRR, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
