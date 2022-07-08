@@ -68,15 +68,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.generateRRR:
                 //TODO
-                String merchantId = "2547916";
-                String apiKey = "1946";
-                String serviceTypeId = "4430731";
-                Date d = new Date();
-                long orderId = d.getTime();
-                String totalAmount = "1000";
-
-
-            String postUrl = "";
+            String postUrl = "https://aqueous-waters-90678.herokuapp.com/";
             String postBody = "{\n" + "\"amount\": \"1000\",\n" +
                     "\"payerName\": \"Arab\",\n" +
                     "\"payerEmail\": \"arabregent@gmail.com\",\n" +
@@ -119,22 +111,18 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Toast.makeText(PaymentActivity.this, "+++++"+response.body(), Toast.LENGTH_SHORT).show();
+
+                final String myResponse = response.body().string();
+
+                PaymentActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(PaymentActivity.this, "---"+myResponse, Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
-    }
-
-    private String bytesToHex(byte[] bytes) {
-        StringBuilder hexString = new StringBuilder(2 * bytes.length);
-        for (int i =0; i < bytes.length; i++){
-            String hex = Integer.toHexString(0xff & bytes[i]);
-            if (hex.length() == 1){
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
     }
 
     void run(String returnedHash, long orderId, String merchantId) throws IOException{

@@ -68,15 +68,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                        if (mAuth.getCurrentUser().isEmailVerified()){
+//                                        if (mAuth.getCurrentUser().isEmailVerified()){
                                             progressBar.setVisibility(View.GONE);
                                             Toast.makeText(LoginActivity.this, "Login Successfully !!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                             finish();
-                                        } else {
-                                            progressBar.setVisibility(View.GONE);
-                                            showAlertDialog();
-                                        }
+//                                        } else {
+//                                            progressBar.setVisibility(View.GONE);
+//                                            showAlertDialog();
+//                                        }
                                     } else{
                                     Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
@@ -108,9 +108,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.login_button:
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                if (firebaseUser != null) {
-                    checkIfEmailVerified(firebaseUser);
-                }
+//                if (firebaseUser != null) {
+//                    checkIfEmailVerified(firebaseUser);
+//                }
+                loginUser();
                 break;
         }
     }
