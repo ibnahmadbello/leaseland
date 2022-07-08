@@ -69,15 +69,25 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.generateRRR:
                 //TODO
             String postUrl = "https://aqueous-waters-90678.herokuapp.com/";
-            String postBody = "{\n" + "\"amount\": \"1000\",\n" +
-                    "\"payerName\": \"Arab\",\n" +
-                    "\"payerEmail\": \"arabregent@gmail.com\",\n" +
-                    "\"payerPhone\": \"08147847855\",\n" +
-                    "\"description\": \"Payment for land leasing\"\n" + "}";
+//            String postBody = "{\n" + "\"amount\": \"1000\",\n" +
+//                    "\"payerName\": \"Arab\",\n" +
+//                    "\"payerEmail\": \"arabregent@gmail.com\",\n" +
+//                    "\"payerPhone\": \"08147847855\",\n" +
+//                    "\"description\": \"Payment for land leasing\"\n" + "}";
 
+                JSONObject bodyPost = new JSONObject();
+                try {
+                    bodyPost.put("amount", "10000");
+                    bodyPost.put("payerName", "Arab");
+                    bodyPost.put("payerEmail", "justforlearningcode@gmail.com");
+                    bodyPost.put("payerPhone", "08123447855");
+                    bodyPost.put("description", "Rent on Land");
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
 
             try {
-                postRequest(postUrl, postBody);
+                postRequest(postUrl, bodyPost);
             } catch (IOException e){
                 e.printStackTrace();
             }
@@ -97,11 +107,14 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void postRequest(String postUrl, String postBody) throws IOException {
+    private void postRequest(String postUrl, JSONObject postBody) throws IOException {
 
         OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = RequestBody.create(postBody, JSON);
-        Request request = new Request.Builder().url(postUrl).post(requestBody).build();
+        RequestBody requestBody = RequestBody.create(postBody.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .post(requestBody)
+                .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -125,69 +138,12 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    void run(String returnedHash, long orderId, String merchantId) throws IOException{
-        OkHttpClient client = new OkHttpClient();
-
-        JSONObject bodyPost = new JSONObject();
-        try {
-            bodyPost.put("serviceTypeId", "4430731");
-            bodyPost.put("amount", "10000");
-            bodyPost.put("orderId", orderId);
-            bodyPost.put("payerName", "Arab");
-            bodyPost.put("payerEmail", "justforlearningcode@gmail.com");
-            bodyPost.put("payerPhone", "08123447855");
-            bodyPost.put("description", "Rent on Land");
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(bodyPost.toString(), JSON);
-
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .header("Content-Type", "application/json")
-                .header("Authorization", "remitaConsumerKey="+merchantId+",remitaConsumerToken="+returnedHash+"")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                call.cancel();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                final String myResponse = response.body().string();
-
-
-                PaymentActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        generateRRR.setText(myResponse);
-                        Toast.makeText(PaymentActivity.this, "---"+myResponse, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
-    }
-
     @Override
     public void onPaymentCompleted(PaymentResponse paymentResponse) {
         Log.v("+++ Response: ", JsonUtil.toJson(paymentResponse));
         Toast.makeText(this, JsonUtil.toJson(paymentResponse), Toast.LENGTH_SHORT).show();
         if (paymentResponse.getResponseMessage()=="SUCCESS")
             startActivity(new Intent(this, HomeActivity.class));
-    }
-
-    private static byte[] getSalt() throws NoSuchAlgorithmException {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        return salt;
     }
 
 }
