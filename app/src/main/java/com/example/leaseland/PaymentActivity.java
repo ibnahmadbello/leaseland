@@ -72,15 +72,16 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.generateRRR:
                 //TODO
                 generateRRR.setClickable(false);
+                webviewRRR.setClickable(false);
                 getRRR();
                 break;
             case R.id.webviewRRR:
                 //TODO
+                generateRRR.setClickable(false);
                 webviewRRR.setClickable(false);
                 getRRR();
                 String url = RIPGateway.Endpoint.DEMO;
                 String api_key = "QzAwMDAxNjMwNzl8NDA4NDEyMjQ0MHw0ODZkYTZkOTE4NTVhNzMzZmIzZTM5MTU2ZDBjZDYxY2Y4MzY4ODQ1NzRkYzIyOTI2OWQzMTU1M2NlNzdkNGZkZGIyNjI1MzA1ZjZkNzkzYzM2NTE4NzUxNTI0OWVjYjAxODUyNGZmYTM3NjY3M2IwZWNjYTU3OWEwYjE5NGMyNQ==";
-
 
                 remitaInlinePaymentSDK.setRemitaGatewayPaymentResponseListener(PaymentActivity.this);
                 remitaInlinePaymentSDK.initiatePayment(PaymentActivity.this, url, api_key, rrr);

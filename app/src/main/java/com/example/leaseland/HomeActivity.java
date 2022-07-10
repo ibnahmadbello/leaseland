@@ -98,6 +98,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.sign_out_button:
                 mAuth.signOut();
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.guarantor_button:
                 //TODO Check if user has guarantor first
