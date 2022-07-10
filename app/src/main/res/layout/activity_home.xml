@@ -9,34 +9,65 @@
 
     <TextView
         android:id="@+id/textView"
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome! Please Complete your Bio-data"
+        android:text="Welcome!"
         android:textSize="32sp"/>
 
-    <Button
-        android:id="@+id/biodata_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click here to Fill Biodata" />
 
-    <Button
-        android:id="@+id/lease_land_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lease Land"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="5dp">
+
+        <Button
+            android:id="@+id/biodata_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Click here to Fill Biodata" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="5dp">
+
+        <Button
+            android:id="@+id/lease_land_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Lease Land"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="5dp">
 
     <Button
         android:id="@+id/guarantor_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="Fill Guarantor info"/>
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/sign_out_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="608dp" />
+        android:layout_margin="10dp"
+        />
 </LinearLayout>
