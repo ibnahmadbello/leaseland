@@ -130,7 +130,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                progressBar.setVisibility(View.GONE);
 
                 final String myResponse = response.body().string();
                 String[] responseArray = myResponse.split(",");
@@ -140,6 +139,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 PaymentActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_LONG).show();
                     }
                 });

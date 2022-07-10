@@ -31,7 +31,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        rrrTextView = findViewById(R.id.rrrTextView);
+        rrrCardView = findViewById(R.id.rrrCardView);
 
         biodataButton = findViewById(R.id.biodata_button);
         biodataButton.setOnClickListener(this);
@@ -50,7 +51,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         preferences = getSharedPreferences(BioDataActivity.BIO_PREF, MODE_PRIVATE);
 
 //        showUserName();
+        setupRRR();
 
+    }
+
+    private void setupRRR() {
+        Intent intent = getIntent();
+        String rrr = intent.getStringExtra("rrr");
+        if (rrr != null){
+            rrrTextView.setText("Generated RRR is: "+rrr);
+
+        } else{
+            rrrTextView.setText("No pending RRR generated.");
+        }
+        rrrCardView.setVisibility(View.VISIBLE);
+        rrrTextView.setVisibility(View.VISIBLE);
     }
 
     // user after successful registration
