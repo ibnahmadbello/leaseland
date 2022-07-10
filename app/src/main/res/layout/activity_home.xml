@@ -77,7 +77,7 @@
             android:id="@+id/rrrTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:layout_gravity="center_horizontal|center|center_vertical"
             android:textStyle="bold"
             android:visibility="gone"/>

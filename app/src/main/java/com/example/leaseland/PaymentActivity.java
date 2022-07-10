@@ -1,10 +1,13 @@
 package com.example.leaseland;
 
+import static com.example.leaseland.BioDataActivity.BIO_PREF;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -79,14 +82,79 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 //TODO
                 generateRRR.setClickable(false);
                 webviewRRR.setClickable(false);
-                getRRR();
-                String url = RIPGateway.Endpoint.DEMO;
-                String api_key = "QzAwMDAxNjMwNzl8NDA4NDEyMjQ0MHw0ODZkYTZkOTE4NTVhNzMzZmIzZTM5MTU2ZDBjZDYxY2Y4MzY4ODQ1NzRkYzIyOTI2OWQzMTU1M2NlNzdkNGZkZGIyNjI1MzA1ZjZkNzkzYzM2NTE4NzUxNTI0OWVjYjAxODUyNGZmYTM3NjY3M2IwZWNjYTU3OWEwYjE5NGMyNQ==";
-
-                remitaInlinePaymentSDK.setRemitaGatewayPaymentResponseListener(PaymentActivity.this);
-                remitaInlinePaymentSDK.initiatePayment(PaymentActivity.this, url, api_key, rrr);
+                try {
+                    getRRRToPayOnline();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                payWithCard();
                 break;
         }
+    }
+
+    private void getRRRToPayOnline() throws IOException {
+        progressBar.setVisibility(View.VISIBLE);
+        String postUrl = "https://aqueous-waters-90678.herokuapp.com/";
+
+        JSONObject bodyPost = new JSONObject();
+        try {
+            bodyPost.put("amount", "10000");
+            bodyPost.put("payerName", "Arab");
+            bodyPost.put("payerEmail", "justforlearningcode@gmail.com");
+            bodyPost.put("payerPhone", "08123447855");
+            bodyPost.put("description", "Rent on Land");
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        postRequestToPayWithCard(postUrl, bodyPost);
+    }
+
+    private void postRequestToPayWithCard(String postUrl, JSONObject bodyPost) {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = RequestBody.create(bodyPost.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                call.cancel();
+                generateRRR.setClickable(true);
+                webviewRRR.setClickable(true);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+                final String myResponse = response.body().string();
+                String[] responseArray = myResponse.split(",");
+                String rrrResponse = responseArray[1];
+                rrr = rrrResponse.substring(7, rrrResponse.length()-1);
+
+//                PaymentActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        progressBar.setVisibility(View.GONE);
+//                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_LONG).show();
+//                    }
+//                });
+
+                payWithCard();
+
+            }
+        });
+
+    }
+
+    private void payWithCard() {
+        String url = RIPGateway.Endpoint.DEMO;
+        String api_key = "QzAwMDAxNjMwNzl8NDA4NDEyMjQ0MHw0ODZkYTZkOTE4NTVhNzMzZmIzZTM5MTU2ZDBjZDYxY2Y4MzY4ODQ1NzRkYzIyOTI2OWQzMTU1M2NlNzdkNGZkZGIyNjI1MzA1ZjZkNzkzYzM2NTE4NzUxNTI0OWVjYjAxODUyNGZmYTM3NjY3M2IwZWNjYTU3OWEwYjE5NGMyNQ==";
+
+        remitaInlinePaymentSDK.setRemitaGatewayPaymentResponseListener(PaymentActivity.this);
+        remitaInlinePaymentSDK.initiatePayment(PaymentActivity.this, url, api_key, rrr);
     }
 
     private void getRRR() {
@@ -140,16 +208,18 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_LONG).show();
                     }
                 });
-
-                generateRRR.setClickable(true);
-                webviewRRR.setClickable(true);
+//                SharedPreferences.Editor editor = getSharedPreferences(BIO_PREF, MODE_PRIVATE).edit();
+//                editor.putString("rrrStatus", rrr);
+//                editor.apply();
                 Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                 intent.putExtra("rrr", rrr);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
+
             }
         });
 
@@ -158,14 +228,25 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onPaymentCompleted(PaymentResponse paymentResponse) {
         Log.v("+++ Response: ", JsonUtil.toJson(paymentResponse));
-        Toast.makeText(this, JsonUtil.toJson(paymentResponse), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, JsonUtil.toJson(paymentResponse), Toast.LENGTH_SHORT).show();
         if (paymentResponse.getResponseMessage()=="SUCCESS"){
-            Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+            intent.putExtra("rrr", rrr + " and transaction successful.");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
         else{
-            Toast.makeText(this, "Payment was not successful!", Toast.LENGTH_SHORT).show();
+            PaymentActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    progressBar.setVisibility(View.GONE);
+                        Toast.makeText(PaymentActivity.this, "Payment was not successful!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-        startActivity(new Intent(this, HomeActivity.class));
+
     }
 
 }

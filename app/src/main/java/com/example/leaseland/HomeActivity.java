@@ -58,6 +58,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void setupRRR() {
         Intent intent = getIntent();
         String rrr = intent.getStringExtra("rrr");
+//        String data = getIntent().getExtras().getString("keyName");
         if (rrr != null){
             rrrTextView.setText("Generated RRR is: "+rrr);
 
@@ -66,6 +67,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
         rrrCardView.setVisibility(View.VISIBLE);
         rrrTextView.setVisibility(View.VISIBLE);
+
+//        String getRRRState = preferences.getString("rrrStatus", null);
+//        if (getRRRState != null){
+//            rrrTextView.setText("Generated RRR is: "+getRRRState);
+//
+//        } else{
+//            rrrTextView.setText("No RRR generated.");
+//        }
+//        rrrCardView.setVisibility(View.VISIBLE);
+//        rrrTextView.setVisibility(View.VISIBLE);
     }
 
     // user after successful registration
