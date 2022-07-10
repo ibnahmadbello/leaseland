@@ -14,13 +14,13 @@
         app:cardCornerRadius="4dp"
         android:layout_margin="10dp">
 
-        <TextView
+        <Button
             android:id="@+id/generateRRR"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text="Generate RRR and pay later"
-            android:textSize="32sp"/>
+            android:textSize="16sp"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -33,16 +33,22 @@
         app:cardCornerRadius="4dp"
         android:layout_margin="10dp">
 
-        <TextView
+        <Button
             android:id="@+id/webviewRRR"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text="Proceed to Remita to pay online"
-            android:textSize="32sp"/>
+            android:textSize="16sp"/>
 
     </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
