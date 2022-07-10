@@ -1,6 +1,7 @@
 package com.example.leaseland;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leaseland.utils.UserAgreement;
@@ -21,11 +23,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private Button signOutButton, biodataButton, guarantorButton, leaseLandButton;
     private FirebaseAuth mAuth;
     private SharedPreferences preferences;
+    private TextView rrrTextView;
+    private CardView rrrCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
 
         biodataButton = findViewById(R.id.biodata_button);
         biodataButton.setOnClickListener(this);

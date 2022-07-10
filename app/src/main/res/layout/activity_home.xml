@@ -63,6 +63,24 @@
 
     </androidx.cardview.widget.CardView>
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rrrCardView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/rrrTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/sign_out_button"
         android:layout_width="wrap_content"

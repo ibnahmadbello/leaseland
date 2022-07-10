@@ -124,6 +124,8 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 call.cancel();
+                generateRRR.setClickable(true);
+                webviewRRR.setClickable(true);
             }
 
             @Override
@@ -138,9 +140,16 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                 PaymentActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PaymentActivity.this, "---"+myResponse+"\n\n"+rrr, Toast.LENGTH_LONG).show();
                     }
                 });
+
+                generateRRR.setClickable(true);
+                webviewRRR.setClickable(true);
+                Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                intent.putExtra("rrr", rrr);
+                startActivity(intent);
+                finish();
             }
         });
 
