@@ -152,4 +152,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    // Check if user is logged in already
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() != null){
+            Toast.makeText(this, "Already Logged In!", Toast.LENGTH_SHORT).show();
+            // todo Start the user profile
+//            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+//            finish();
+        } else {
+            Toast.makeText(this, "You can login now!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
