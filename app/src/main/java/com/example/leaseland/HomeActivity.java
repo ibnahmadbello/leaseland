@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button signOutButton, biodataButton, guarantorButton, leaseLandButton;
+    private Button biodataButton, guarantorButton, leaseLandButton;
     private FirebaseAuth mAuth;
     private SharedPreferences preferences;
     private TextView rrrTextView;
@@ -40,10 +40,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         biodataButton = findViewById(R.id.biodata_button);
         biodataButton.setOnClickListener(this);
 
-        signOutButton = findViewById(R.id.sign_out_button);
         mAuth = FirebaseAuth.getInstance();
-
-        signOutButton.setOnClickListener(this);
 
         guarantorButton = findViewById(R.id.guarantor_button);
         guarantorButton.setOnClickListener(this);
@@ -129,11 +126,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     startActivity(new Intent(this, BioDataActivity.class));
                 }
-                break;
-            case R.id.sign_out_button:
-                mAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                finish();
                 break;
             case R.id.guarantor_button:
                 //TODO Check if user has guarantor first
