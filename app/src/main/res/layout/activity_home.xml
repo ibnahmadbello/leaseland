@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome!"
+        android:text="@string/welcome_title"
         android:textSize="32sp"/>
 
 
@@ -27,7 +27,7 @@
             android:id="@+id/biodata_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Click here to Fill Biodata" />
+            android:text="@string/click_here_to_fill_biodata" />
 
     </androidx.cardview.widget.CardView>
 
@@ -44,7 +44,7 @@
             android:id="@+id/lease_land_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Lease Land"/>
+            android:text="@string/lease_land"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -59,7 +59,7 @@
         android:id="@+id/guarantor_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fill Guarantor info"/>
+        android:text="@string/fill_guarantor_info"/>
 
     </androidx.cardview.widget.CardView>
 

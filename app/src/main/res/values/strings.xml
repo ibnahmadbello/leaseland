@@ -30,4 +30,8 @@
     <string name="guarantor_question">Do you want to update your Guarantor Information?</string>
     <string name="guarantor">You have submitted your guarantor information.</string>
     <string name="action_switch_logout">Log Out</string>
+    <string name="welcome_title">Welcome!</string>
+    <string name="click_here_to_fill_biodata">Click here to Fill Biodata</string>
+    <string name="lease_land">Lease Land</string>
+    <string name="fill_guarantor_info">Fill Guarantor info</string>
 </resources>
