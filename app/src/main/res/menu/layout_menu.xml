@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_switch_layout"
+        android:id="@+id/action_switch_logout"
         android:title="@string/action_switch_logout"
         app:showAsAction="never"/>
 
