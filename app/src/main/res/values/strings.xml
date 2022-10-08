@@ -29,4 +29,5 @@
     <string name="guarantor_title">Update Guarantor</string>
     <string name="guarantor_question">Do you want to update your Guarantor Information?</string>
     <string name="guarantor">You have submitted your guarantor information.</string>
+    <string name="action_switch_logout">Log Out</string>
 </resources>
